@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { reserveSeat } from '../services/api';
 
-function ReserveSeat() {
+function ReserveSeat({ onReserveSuccess }) {
     const [email, setEmail] = useState('');
     const [loading, setLoading] = useState(false);
     const [errorMsg, setErrorMsg] = useState('');
@@ -22,6 +22,10 @@ function ReserveSeat() {
         try {
             const data = await reserveSeat(email);
             setSuccessMsg(`${data.message}`);
+
+            if (onReserveSuccess) {
+                onReserveSuccess(data);
+            }
         } catch (err) {
             const msg = err.response?.data?.message || 'Failed to reserve seat.';
             setErrorMsg(msg);

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { confirmSeat } from '../services/api';
 
-function ConfirmSeat() {
+function ConfirmSeat({ onConfirmSuccess }) {
     const [holdId, setHoldId] = useState('');
     const [loading, setLoading] = useState(false);
     const [errorMsg, setErrorMsg] = useState('');
@@ -22,6 +22,7 @@ function ConfirmSeat() {
         try {
             const data = await confirmSeat(holdId);
             setSuccessMsg(data.message || 'Seat confirmed successfully!');
+            if (onConfirmSuccess) onConfirmSuccess();
             setHoldId('');
         } catch (err) {
             const msg = err.response?.data?.message || 'Failed to confirm seat.';
@@ -33,7 +34,7 @@ function ConfirmSeat() {
 
     return (
         <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-4">
-            {/* Alerts */}
+
             {errorMsg && (
                 <div className="bg-red-500/10 text-red-400 text-xs p-3 rounded-lg text-center font-medium">
                     {errorMsg}
