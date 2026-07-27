@@ -6,6 +6,7 @@ import { ErrorMiddleware } from './middleware/error.js';
 import seedSeats from './utils/seedSeats.js';
 import reserveRoutes from './routes/reserveRoutes.js';
 import confirmRoutes from './routes/confirmRoutes.js';
+import statusRouter from './routes/statusRoutes.js';
 
 dotenv.config();
 
@@ -27,6 +28,7 @@ app.get('/', (req, res) => {
 //Routes
 app.use('/api', reserveRoutes);
 app.use('/api', confirmRoutes);
+app.use('/api', statusRouter);
 
 const PORT = process.env.PORT || 5000;
 
