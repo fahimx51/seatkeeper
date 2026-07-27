@@ -37,7 +37,7 @@ export const reserveSeat = async (req, res, next) => {
             return res.status(200).json({
                 holdId: existingHold.holdId,
                 expiresAt: existingHold.expiresAt,
-                message: `You already hold a seat with holdId ${existingHold.holdId}`
+                message: `You already hold a seat with HoldId = ${existingHold.holdId}`
             });
         }
 
@@ -67,7 +67,7 @@ export const reserveSeat = async (req, res, next) => {
         res.status(200).json({
             holdId: reservedSeat.holdId,
             expiresAt: reservedSeat.expiresAt,
-            message: `Successfully hold a seat with holdId ${existingHold.holdId}`
+            message: `Successfully hold a seat with HoldId = ${reservedSeat.holdId}`
         });
     }
 
