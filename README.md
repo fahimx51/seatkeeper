@@ -151,13 +151,3 @@ npm install
 # .env: VITE_API_URL=http://localhost:5000/api
 npm run dev
 ```
-
-## Testing the concurrency guarantee
-
-```bash
-seq 1 100 | xargs -P100 -I{} curl -s -X POST https://seatkeeper.onrender.com/api/reserve \
-  -H "Content-Type: application/json" \
-  -d "{\"email\":\"user{}@example.com\"}"
-```
-Then check `GET https://seatkeeper.onrender.com/api/status` — `held + confirmed` should never
-exceed 30.
