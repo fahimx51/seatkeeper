@@ -14,11 +14,25 @@ dotenv.config();
 const app = express();
 
 // Middlewares
-app.use(cors());
-app.use(express.json());
+const allowedOrigins = [
+    'http://localhost:5000',
+    process.env.CLIENT_URL
+].filter(Boolean);
 
-// error middleware
-app.use(ErrorMiddleware);
+app.use(cors({
+    origin: function (origin, callback) {
+        if (!origin) return callback(null, true);
+
+        if (!process.env.CLIENT_URL || allowedOrigins.includes(origin)) {
+            return callback(null, true);
+        }
+
+        return callback(new Error('Not allowed by CORS'));
+    },
+    credentials: true
+}));
+
+app.use(express.json());
 
 // Test Route
 app.get('/', (req, res) => {
@@ -31,6 +45,9 @@ app.use('/api', reserveRoutes);
 app.use('/api', confirmRoutes);
 app.use('/api', statusRouter);
 app.use('/api', reservationRouter);
+
+// error middleware
+app.use(ErrorMiddleware);
 
 const PORT = process.env.PORT || 5000;
 
