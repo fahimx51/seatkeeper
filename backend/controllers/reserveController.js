@@ -21,7 +21,7 @@ export const reserveSeat = async (req, res, next) => {
         const confirmedSeat = await Seat.findOne({ email, status: 'confirmed' });
 
         if (confirmedSeat) {
-            return res.status(400).json({ message: `Email already has a confirmed seat ${confirmedSeat.seatNumber}`});
+            return res.status(400).json({ message: `Email already has a confirmed seat ${confirmedSeat.seatNumber}` });
         }
 
         const now = new Date();
@@ -37,7 +37,7 @@ export const reserveSeat = async (req, res, next) => {
             return res.status(200).json({
                 holdId: existingHold.holdId,
                 expiresAt: existingHold.expiresAt,
-                message: `You already hold the sit #${existingHold.seatNumber}`
+                message: `You already hold a seat with holdId ${existingHold.holdId}`
             });
         }
 
@@ -67,6 +67,7 @@ export const reserveSeat = async (req, res, next) => {
         res.status(200).json({
             holdId: reservedSeat.holdId,
             expiresAt: reservedSeat.expiresAt,
+            message: `Successfully hold a seat with holdId ${existingHold.holdId}`
         });
     }
 

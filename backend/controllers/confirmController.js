@@ -19,7 +19,7 @@ export const confirmSeat = async (req, res, next) => {
 
         if (alreadyBooked) {
             return res.status(200).json({
-                message: `You have already booked sit ${alreadyBooked.seatNumber}`
+                message: `You have already booked sit with number #${alreadyBooked.seatNumber}`
             });
         }
 
@@ -45,8 +45,7 @@ export const confirmSeat = async (req, res, next) => {
         }
 
         res.status(200).json({
-            message: 'Seat confirmed successfully',
-            seatNumber: confirmedSeat.seatNumber,
+            message: 'Successfully confirmed a sit!',
             status: confirmedSeat.status,
             email: confirmedSeat.email
         });

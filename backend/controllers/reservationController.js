@@ -37,7 +37,7 @@ export const getReservationsByEmail = async (req, res, next) => {
             return res.status(200).json({
                 status: reservationStatus.status,
                 holdId: reservationStatus.holdId,
-                message: `Hold a seat #${reservationStatus.seatNumber}, confirm it before exipre`
+                message: `Hold a seat with holdid #${reservationStatus.holdId}, confirm it before exipre`
             });
         }
 
