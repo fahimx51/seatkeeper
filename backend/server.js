@@ -7,6 +7,7 @@ import seedSeats from './utils/seedSeats.js';
 import reserveRoutes from './routes/reserveRoutes.js';
 import confirmRoutes from './routes/confirmRoutes.js';
 import statusRouter from './routes/statusRoutes.js';
+import reservationRouter from './routes/reservationRoutes.js';
 
 dotenv.config();
 
@@ -29,6 +30,7 @@ app.get('/', (req, res) => {
 app.use('/api', reserveRoutes);
 app.use('/api', confirmRoutes);
 app.use('/api', statusRouter);
+app.use('/api', reservationRouter);
 
 const PORT = process.env.PORT || 5000;
 
