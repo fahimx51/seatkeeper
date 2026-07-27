@@ -21,7 +21,6 @@ function ReserveSeat() {
 
         try {
             const data = await reserveSeat(email);
-            console.log(data);
             setSuccessMsg(`${data.message}`);
         } catch (err) {
             const msg = err.response?.data?.message || 'Failed to reserve seat.';

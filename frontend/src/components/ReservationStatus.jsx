@@ -69,7 +69,7 @@ function ReservationStatus() {
                 <div className="bg-slate-950 border border-slate-800 rounded-xl p-4 space-y-2 mt-4 text-xs sm:text-sm">
                     <div className="flex justify-between items-center">
                         <span className="text-slate-400">Seat Number:</span>
-                        <span className="font-bold text-white">#{reservation.seatNumber || reservation.seatId}</span>
+                        <span className="font-bold text-white">#{reservation.seatNumber}</span>
                     </div>
 
                     <div className="flex justify-between items-center">

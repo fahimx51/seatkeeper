@@ -21,7 +21,7 @@ export const reserveSeat = async (req, res, next) => {
         const confirmedSeat = await Seat.findOne({ email, status: 'confirmed' });
 
         if (confirmedSeat) {
-            return res.status(400).json({ message: `Email already has a confirmed seat ${confirmedSeat.seatNumber}` });
+            return res.status(400).json({ message: `You already confirmed a seat, one user can't occupy multiple slots` });
         }
 
         const now = new Date();

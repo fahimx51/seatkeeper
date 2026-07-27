@@ -27,25 +27,28 @@ export const getReservationsByEmail = async (req, res, next) => {
             ]
         }).lean();
 
+        if (!reservationStatus) {
+            return res.status(404).json({
+                message: 'No active reservations found for this email',
+                email,
+            });
+        }
+
         if (reservationStatus.status === "confirmed") {
             return res.status(200).json({
                 status: reservationStatus.status,
+                seatNumber: reservationStatus.seatNumber,
                 message: `Booked a seat with number #${reservationStatus.seatNumber}`
             });
         }
         else if (reservationStatus.status === "held") {
             return res.status(200).json({
                 status: reservationStatus.status,
+                seatNumber: reservationStatus.seatNumber,
                 holdId: reservationStatus.holdId,
                 message: `Hold a seat with HoldId = ${reservationStatus.holdId}, confirm it before exipre`
             });
         }
-
-        return res.status(200).json({
-            message: 'No active reservations found for this email',
-            email,
-            reservations: []
-        });
 
     } catch (error) {
         next(new ErrorHandler(error.message, 500));
